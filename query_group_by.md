@@ -1,3 +1,5 @@
+## GROUP BY queries examples
+
 1. Contare quanti iscritti ci sono stati ogni anno
 
 SELECT COUNT(student.id) AS num_students,
@@ -11,6 +13,10 @@ FROM teachers
 GROUP BY office_address;
 
 3. Calcolare la media dei voti di ogni appello d'esame
+
+SELECT exam_id, AVG(vote) AS average_vote
+FROM student_exam
+GROUP BY exam_id;
 
 
 4. Contare quanti corsi di laurea ci sono per ogni dipartimento
