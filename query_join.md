@@ -1,3 +1,5 @@
+## JOIN queries examples
+
 1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 
 SELECT *
@@ -31,7 +33,21 @@ ORDER BY students.surname, students.name;
 
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
 
+SELECT degrees.name as `degree_name`, courses.name as `course_name`, teachers.name as `teacher_name`, teachers.surname as `teacher_surname`
+FROM degrees
+JOIN courses ON degrees.id = courses.degree_id
+JOIN course_teacher ON courses.id = course_teacher.course_id
+JOIN teachers ON course_teacher.teacher_id = teachers.id
+ORDER BY `degree_name`;
+
 6. Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
+
+SELECT DISTINCT teachers.id
+FROM teachers
+JOIN course_teacher ON teachers.id = course_teacher.teacher_id
+JOIN courses ON course_teacher.course_id = courses.id
+JOIN degrees ON courses.degree_id = degrees.id
+WHERE degrees.department_id = 5;
 
 7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti
 per ogni esame, stampando anche il voto massimo. Successivamente,
