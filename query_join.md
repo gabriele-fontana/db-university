@@ -49,6 +49,9 @@ JOIN courses ON course_teacher.course_id = courses.id
 JOIN degrees ON courses.degree_id = degrees.id
 WHERE degrees.department_id = 5;
 
-7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti
-per ogni esame, stampando anche il voto massimo. Successivamente,
-filtrare i tentativi con voto minimo 18.
+7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente, filtrare i tentativi con voto minimo 18.
+
+SELECT student_id, exam_id, MAX(vote) AS best_vote, COUNT(student_id) AS attempts_num
+FROM exam_student 
+GROUP BY student_id, exam_id
+HAVING MIN(vote) >= 18;
